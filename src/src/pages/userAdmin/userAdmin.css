@@ -1,0 +1,154 @@
+.userAdmin{
+    background-color: #F9FAFC;
+    height: calc(100vh - 173px);
+}
+.userTabs .tab-bar{
+    border-bottom: 2px solid #34404b;
+}
+.userTabs .nav-item a{
+    color: #0f294c;
+    border-radius: 5px 5px 0px 0px;
+    padding: 8px 30px;
+    font-weight: 500;
+}
+.userTabs .nav-item a.active{
+    background-color: #0f294c;
+    color: #fff;
+}
+.card-profile svg{
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 100%;
+    fill: #000000;
+}
+.user-data-table table tr th,
+.user-data-table table tr td{
+    padding: 15px;
+}
+.user-data-table table thead{
+    background-color: rgb(243, 244, 246);
+    border-bottom: none;
+}
+.user-data-table table tr th{
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 0px;
+}
+.user-data-table table tr td label{
+    font-weight: 500;
+}
+.flight-details{
+    display: flex;
+    flex: 1 1;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    overflow-y: hidden;
+}
+.flight-details-inner .breadcrumbs li a{
+    color: #34404b;
+    font-weight: 500;
+}
+.flight-details-inner{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+}
+.flight-details-inner #manage-order:after{
+    margin-left: 10px;
+    vertical-align: inherit;
+}
+#manage-order:after{
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.travel-item-circle{
+    box-sizing: content-box;
+    position: relative;
+    top: 4px;
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    margin-left: 25px;
+    margin-right: 30px;
+    border: 1px solid #ababb4;
+}
+.travel-item-itinerary:before{
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width: 2px;
+    height: calc(100% + 32px);
+    -webkit-mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAADwCAMAAAD8WVBVAAAAb1BMVEUAAAC/v8+/v9+/v9e/w9u/wtm/wty/xdrBxt2/xNi/xNvBxdu/w9m/w9vBxNu/w9q/w9zAxNzAxdy/wtm/wtrAw9zAxdvAxdy/xNnAxNvAxNrAxNvAxN3AxNrAxNzAxdzAw9vAw9zAxNvAxNzAxNtGKypvAAAAJHRSTlMAEBAgQFBQYG9wcH+AgI+QkJ+foKCvr6+wv8/Pz9/f3+/v7+9leMSZAAABiklEQVR4Ae3bW5LTMBBG4XakJIwxYRIuIITMhX//ayS8ApWJLp6uqTrfBk61rDe3DAAAAAAAAAAAAAC2Mu3nSy66KunjEqdnqr5O+kuag20tJv1Xii7ZP9a9bSUk3XQOtolXP/SE9WjjTSfd4TS+m3WXHGyosOpOa/DpSutk42RVyOPKJ1U52SBHVXoY+oEr/Aw2wlnVkg1wUINo/VbJZeQo+YycJJeRgxpN1mdWo8XnpLvPeif5nHVUs731WNTswXp8ULOLz92SvliPombfrIc6vPgwYcKECRMmTJgwYcKECRMmTJgwYcKECRMmTJgwYcKECRP2/3H9Vc2S9XinZp/7N248dm4Oahb9V24cl4waLB0bNz5nHfxX5xyWBR1GLtYvNm+ROYx8thHCL1UqwYaYVelogzyqylsbZZdVIds4u9L/gduE4tK9Crn/yUCjx/571ehY9ITvs20ivNdNKdhWDuVGNno9LdtamNM/1TfP9ZAvLp9S0VXJl/mwWRUAAAAAAAAAAAAAfgPrRYYX/D3mLQAAAABJRU5ErkJggg==) center/contain;
+    mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAADwCAMAAAD8WVBVAAAAb1BMVEUAAAC/v8+/v9+/v9e/w9u/wtm/wty/xdrBxt2/xNi/xNvBxdu/w9m/w9vBxNu/w9q/w9zAxNzAxdy/wtm/wtrAw9zAxdvAxdy/xNnAxNvAxNrAxNvAxN3AxNrAxNzAxdzAw9vAw9zAxNvAxNzAxNtGKypvAAAAJHRSTlMAEBAgQFBQYG9wcH+AgI+QkJ+foKCvr6+wv8/Pz9/f3+/v7+9leMSZAAABiklEQVR4Ae3bW5LTMBBG4XakJIwxYRIuIITMhX//ayS8ApWJLp6uqTrfBk61rDe3DAAAAAAAAAAAAAC2Mu3nSy66KunjEqdnqr5O+kuag20tJv1Xii7ZP9a9bSUk3XQOtolXP/SE9WjjTSfd4TS+m3WXHGyosOpOa/DpSutk42RVyOPKJ1U52SBHVXoY+oEr/Aw2wlnVkg1wUINo/VbJZeQo+YycJJeRgxpN1mdWo8XnpLvPeif5nHVUs731WNTswXp8ULOLz92SvliPombfrIc6vPgwYcKECRMmTJgwYcKECRMmTJgwYcKECRMmTJgwYcKECRP2/3H9Vc2S9XinZp/7N248dm4Oahb9V24cl4waLB0bNz5nHfxX5xyWBR1GLtYvNm+ROYx8thHCL1UqwYaYVelogzyqylsbZZdVIds4u9L/gduE4tK9Crn/yUCjx/571ehY9ITvs20ivNdNKdhWDuVGNno9LdtamNM/1TfP9ZAvLp9S0VXJl/mwWRUAAAAAAAAAAAAAfgPrRYYX/D3mLQAAAABJRU5ErkJggg==) center/contain;
+    background-position: 50%;
+    background-repeat: repeat-y;
+    background-size: contain;
+    background: #ababb4;
+}
+.travel-item-itinerary-duration,
+.travel-item-detail{
+    margin-left: 70px;
+}
+.travel-item-detail div{
+    font-size: 14px;
+}
+.flight-summary-conditions{
+    border-top: 1px dashed #e2e2e8;
+    padding-top: 40px;
+    margin-top: 40px;
+}
+.flight-summary-conditions .flight-summary-conditions-item{
+    border: 1px solid #e2e2e8;
+}
+.passenger-tag span{
+    background-color: #d2ebf3;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.biling-table table thead tr th{
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom-color: #ccc !important;
+    background-color: #f5f5f5;
+}
+.biling-table table tfoot tr td{
+    font-size: 12px;
+    background-color: #f5f5f5;
+    font-weight: 500;
+}
+.biling-table table tbody tr td{
+    font-size: 14px;
+    border-bottom-color: #ccc !important;
+}
+.summery-status p span{
+    padding: 3px 12px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    font-size: 14px;
+    border-radius: 30px;
+    font-weight: 500;
+}
+.order-summery h6{
+    font-size: 14px;
+}
+@media only screen and (max-width: 576px) {
+    .travel-item-itinerary:before{
+        left: 6px;
+    }
+    .travel-item-circle{
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+    .travel-item-itinerary-duration, .travel-item-detail{
+        margin-left: 30px;
+    }
+}
