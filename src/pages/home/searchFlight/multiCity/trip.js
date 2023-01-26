@@ -7,19 +7,31 @@ class TripCity extends Component{
         const{onMultiWayDateChange,index}=this.props
         onMultiWayDateChange(index,startDate);
     }
+
+    componentDidMount(){
+        const { autoSearch } = this.props
+        if (window.performance) {
+            if (performance.navigation.type == 1 && autoSearch) {
+                setTimeout(() => {
+                      this.props.onSearchFlight()
+                }, 1000);
+            }
+          }
+    }
     onSearchFrom=(value)=>{
         const{index}=this.props
         console.log("onSearchFrom", value)
-        this.props.MultiCitySearchUpdate("from",index,value)
+        this.props.MultiCitySearchUpdate(index,"from",value)
     }
     onSearchTo=(value)=>{
         const{index}=this.props
         console.log("onSearchTo", value)
-        this.props.MultiCitySearchUpdate("to",index,value)
+        this.props.MultiCitySearchUpdate(index, "to",value)
     }
     render(){
         const{addTrips,onClickToRemoveMultiCity,onClickToReverseMultiCity,onMultiWayDateChange,item,index}=this.props;
         console.log("item-item--",item)
+        console.log("multi",this.props)
         return <div className="form-row mb-3">
             <div className="serach-box align-items-center mb-3 serch-multi-city">
                 <div className="serach-box-item d-flex align-items-center serch-multi-city-one">

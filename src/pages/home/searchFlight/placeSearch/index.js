@@ -13,6 +13,7 @@ class PlaceSearch extends Component {
     // note: the id field is mandatory
 
     handleOnSearch = async (string, results) => {
+
         // onSearch will have as the first callback parameter
         // the string searched and for the second the results.
         var self = this
@@ -28,9 +29,11 @@ class PlaceSearch extends Component {
                 console.log("dat 1aaa", searchData)
                 self.setState({ items: searchData, completeData: data })
             }
+            else console.log("dat 1aaa", data)
             return response.data
 
         })
+        console.log("dat 1aaa", string)
         console.log(string, results)
     }
 
@@ -48,6 +51,8 @@ class PlaceSearch extends Component {
     render() {
         const { items, completeData } = this.state;
         const { value,placeholder } = this.props;
+        console.log('value', value)
+        
         return (
             <ReactSearchAutocomplete
                 items={items}
@@ -62,6 +67,7 @@ class PlaceSearch extends Component {
                 showIcon={false}
                 placeholder={placeholder}
                 showClear={false}
+                showNoResults={false}
 
             />
 

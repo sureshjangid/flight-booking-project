@@ -7,9 +7,13 @@ import WhyChooseUs from './whyChooseUs'
 import AppFooter from '../footer'
 import LoginPopUp from '../loginPopup'
 import SearchFlight from './searchFlight'
+import Cookies from "universal-cookie";
 
+const cookies = new Cookies();
 class Home extends Component {
-
+componentDidMount() {
+    cookies.remove("flightData")
+}
     render() {
         console.log("history",this.props )
         return <>
@@ -17,7 +21,7 @@ class Home extends Component {
             <Header />
             <main>
                 {/* <HomeBanner /> */}
-                <SearchFlight {...this.props}/>
+                <SearchFlight {...this.props} autoSearch={false} />
                 <OfferSection />
                 <CancelProtection />
                 <WhyChooseUs/>

@@ -1,23 +1,42 @@
 import React, { Component } from "react";
 import MultiRangeSlider from "./MultiRangeSlider";
 import { getAirlines } from '../../../action/flightActions'
+import searchData from "../searchData";
 const Slider = () => <>sd</>
 
 class Aside extends Component {
     state = {
         airlines: [],
+        searchData: null
 
     }
     componentDidMount() {
-        getAirlines().then((responseData) => {
-            const { data } = responseData.data
-            this.setState({ airlines: data })
+        const { searchData } = this.props
+        this.setState({searchData: searchData})
+        // getAirlines().then((responseData) => {
+        //     const { data } = responseData.data
+        //     this.setState({ airlines: data })
+        // })data.offers[0].owner
+        const airLine = []
+        var airLine1 = []
+        searchData.offers.map(flight => (
+            airLine.push(flight.owner)
+        ))
 
-        })
+        airLine1 = airLine.map(JSON.stringify);
+              
+        var uSet = new Set(airLine1);
+        uSet = Array.from(uSet).map(JSON.parse);
+
+        console.log("filter",airLine, uSet)
+        this.setState({ airlines: uSet })
     }
 
+
+
+
     render() {
-        const { countData } = this.props
+        const { countData, filterFlightByName, filterFlightByPrice } = this.props
         const { airlines } = this.state
         console.log("getAirlines", airlines)
         return (<aside className="aside-filter">
@@ -82,7 +101,7 @@ class Aside extends Component {
                                     {
                                         airlines && airlines.map((item, airIndex) => <li key={airIndex}>
                                             <div className="airlince-list-items">
-                                                <input type="checkbox" />
+                                                <input type="checkbox" onChange={(e) => filterFlightByName(item, e.target.checked)} />
                                                 <span></span>
                                                 {item.name}
                                             </div>
@@ -148,7 +167,7 @@ class Aside extends Component {
                     <div id="collapseFour" className="accordion-collapse collapse show" aria-labelledby="headingFour">
                         <div className="accordion-body">
                             <div className="range-bar">
-                                <MultiRangeSlider min={0} max={1000} onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}/>
+                                <MultiRangeSlider min={0} max={1000} onChange={({ min, max }) => filterFlightByPrice(min, max) }/>
                             </div>
                         </div>
                     </div>

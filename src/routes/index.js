@@ -23,9 +23,6 @@ const AppRoutes = (props) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(SetFlightSearch(cookies.get('flightData')))
-setTimeout(() => {
-    console.log("cookies")
-}, 5000);
     }, [])
     return <>
     <Loaders />

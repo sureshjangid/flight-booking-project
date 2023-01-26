@@ -17,7 +17,8 @@ class TravellersDetails extends Component {
         phoneNumber: "",
         loyaltyProgrammeAccounts: [
         ],
-        service: []
+        service: [],
+        baggage: [],
     }
     componentDidMount() {
         const { passengerItem ,passengerDataUpdate,insertIndex} = this.props
@@ -62,12 +63,26 @@ class TravellersDetails extends Component {
             passengerDataUpdate(insertIndex,"born_on",this.state.bornOn)
         })
     }
-    clickToaddBaggege = (bItem) => event => {
+    clickToaddBaggege = (bItem, index) => event => {
         console.log("data"," ------------- clickToaddBaggege")
         console.log("data-----------------", this.state.service)
         try{
-            let { service } = this.state;
+            let { service, baggage } = this.state;
             service.push(bItem)
+            var bg = baggage
+            const i = bg.findIndex(b => b.index == index)
+            if(i < 0) {
+                bg.push({index: index, count: 1})
+            }
+           else{ 
+            console.log("data", "else", bg)
+            const i = bg.findIndex(b => b.index == index)
+            bg[i].count += 1
+            console.log("data", bg[i].count)
+
+            // bg.map((b,i) => b.index == index ? (bg[i]['count'] += 1) : null )
+           }
+            this.setState({baggage: bg})
             const{serviceadd}=this.props
             serviceadd(bItem)
             this.setState({ service })
@@ -76,8 +91,22 @@ class TravellersDetails extends Component {
             console.log("data", e)
         }
     }
-    clickToRemoveBaggege = (id,index) => event => {
-        let { service } = this.state;
+    clickToRemoveBaggege = (id,index, idx) => event => {
+        let { service, baggage } = this.state;
+        var bg = baggage
+        const i = bg.findIndex(b => b.index == idx)
+        if(i < 0) {
+            // bg.push({index: index, count: 1})
+        }
+       else{ 
+        console.log("data", "else", bg)
+        const i = bg.findIndex(b => b.index == idx)
+        bg[i].count -= 1
+
+        // bg.map((b,i) => b.index == index ? (bg[i]['count'] += 1) : null )
+       }
+       this.setState({baggage: bg})
+
         if (service.length > 0 && service[index]) {
             const{serviceRemove}=this.props
             service.splice(index, 1);
@@ -89,6 +118,7 @@ class TravellersDetails extends Component {
 
     render() {
         const { passengerItem, bookingData } = this.props;
+        const { baggage } = this.state
         console.log("passengerItem", passengerItem, bookingData, this.state)
         return <>
             <div className="traveller-details-items">
@@ -173,11 +203,11 @@ class TravellersDetails extends Component {
                                         <div className="col-md-4 col-sm-6 col-5">
                                             <div className="baggage-selection-qty">
                                                 <div className="counter d-flex align-items-center justify-content-end">
-                                                    <button type="button" className="btn btn-secondary btn-minus border-0 rounded-0" onClick={this.clickToRemoveBaggege(bItem.id,bIdex)}>
+                                                    <button type="button" className="btn btn-secondary btn-minus border-0 rounded-0" onClick={this.clickToRemoveBaggege(bItem.id,bIdex, bItemServiceIndx)}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="#fff"><path d="M400 288h-352c-17.69 0-32-14.32-32-32.01s14.31-31.99 32-31.99h352c17.69 0 32 14.3 32 31.99S417.7 288 400 288z" /></svg>
                                                     </button>
-                                                    <div className="counter-lable">{this.state.service.length}</div>
-                                                    <button type="button" className="btn btn-primary btn-plus rounded-0" onClick={this.clickToaddBaggege(bItem)}>
+                                                    <div className="counter-lable">{this.state.baggage[bItemServiceIndx] ? this.state.baggage[bItemServiceIndx].count : 0}</div>
+                                                    <button type="button" className="btn btn-primary btn-plus rounded-0" onClick={this.clickToaddBaggege(bItem, bItemServiceIndx)}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="#fff"><path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" /></svg>
                                                     </button>
                                                 </div>

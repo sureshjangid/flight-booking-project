@@ -5,8 +5,9 @@ import moment from "moment";
 class RoundTrip extends Component{
 
     componentDidMount(){
+        const { autoSearch } = this.props
         if (window.performance) {
-            if (performance.navigation.type == 1) {
+            if (performance.navigation.type == 1 && autoSearch) {
                 setTimeout(() => {
                     
                       this.props.onSearchFlight()
@@ -67,8 +68,8 @@ class RoundTrip extends Component{
                 </div>
                 <div className="saprator-vertical"></div>
                 <div className="form-group type-input">
-                    <DateRange onDateChange={this.onReturnDate} key={"onReturnDate"}>
-                        <input type="text" className="form-control" placeholder="dd/mm/yyyy"  value={moment(roundTrips.returnDate).format("DD/MM/YYYY")} />
+                    <DateRange onDateChange={this.onReturnDate} key={"onReturnDate"} start_date={moment(roundTrips.deaprtDate)}>
+                        <input type="text" className="form-control" min={moment(roundTrips.deaprtDate)} placeholder="dd/mm/yyyy"  value={moment(roundTrips.returnDate).format("DD/MM/YYYY")} />
                     </DateRange>
                 </div>
             </div>
