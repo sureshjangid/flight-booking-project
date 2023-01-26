@@ -9,7 +9,7 @@ import './index.css';
 import Routes from './routes';
 import store from "./redux/store"
 import history from './routes/history';
-import Loaders from './container/loader'
+import Loaders from './container/loader' 
 
 const { PUBLIC_URL } = process.env;
 const root = ReactDOM.createRoot(document.getElementById('root'));
