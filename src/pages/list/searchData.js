@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Aside from './aside'
 import ListData from './listData'
-import {offerRequestID} from '../../action/flightActions'
+import {filterFlightByName, offerRequestID, sortCheapestFlight} from '../../action/flightActions'
 class SearchList extends Component {
     state={
-        searchData:{}
+        searchData:this.props.searchData
     }
 
     filterClick = () =>{
@@ -14,12 +14,48 @@ class SearchList extends Component {
 
     componentDidMount(){
         const{searchData}=this.props;
-        this.setState({searchData})
+        this.setState({searchData: searchData   })
+    }
+
+    onCheapest = () => {
+        const{searchData,sortCheapestFlight}=this.props;
+        const sd = searchData.offers
+        console.log("searchData", parseFloat(sd[0].base_amount))
+        sd.sort((a,b) => parseFloat(a.base_amount) - parseFloat(b.base_amount))
+        sortCheapestFlight({...searchData, offers: sd})
+        console.log("searchData", searchData, sd)
+    }
+
+    filterFlightByName = (item, checked) => {
+        const { filterFlightByName } = this.props
+        const { searchData } = this.state
+        console.log('filter', item, searchData, checked) 
+        const airlineName = item
+        if(checked) {
+            const filteredFlight = this.props.searchData.offers.filter(flight => flight.owner.id == airlineName.id)
+            // filterFlightByName({...searchData, offers: filteredFlight})
+            this.setState({searchData: { ...this.props.searchData, offers: filteredFlight}})
+        }
+        else{
+            this.setState({searchData: { ...this.props.searchData}})
+            // filterFlightByName(this.props.searchData)
+        }
+
+
+    }
+
+    filterFlightByPrice = (min, max) => {
+            // const filteredFlight = this.props.searchData.offers.filter(flight => flight.owner.id == airlineName.id)
+            const filteredFlight = this.props.searchData.offers.filter(flight => parseFloat(flight.base_amount) > parseFloat(min) && parseFloat(flight.base_amount) < parseFloat(max))
+            this.setState({searchData: { ...this.props.searchData, offers: filteredFlight}})
+            // this.setState({searchData: { ...this.props.searchData}})
+
     }
 
     render() {
-        const { searchData } = this.props
-        console.log("searchData", searchData.offers)
+        const { filterFlightByName } = this.props
+        const { searchData } = this.state
+        console.log("searchData", searchData)
         return <>
             {searchData && Object.keys(searchData).length > 0 ? <section className="flight-listings pb-5">
                 <div className="container">
@@ -28,7 +64,7 @@ class SearchList extends Component {
                             <div className="mobile-filter text-end mb-3">
                                 <button className="btn btn-dark rounded-0 px-4" onClick={this.filterClick}>Filter</button>
                             </div>
-                            {searchData.offers.length>0?<Aside countData={searchData.offers.length} />:
+                            {searchData.offers.length>0?<Aside filterFlightByPrice={this.filterFlightByPrice} searchData={this.props.searchData} filterFlightByName={this.filterFlightByName} countData={searchData.offers.length} />:
                             <div className="aside-filter">
                                 <div className="border-bottom pb-3">
                                     <div className="sk_line sk_line_20 sk_line_height_20 m-0 mr-4"></div>
@@ -132,7 +168,7 @@ class SearchList extends Component {
                                         <button className="nav-link active" id="recommended-tab" data-bs-toggle="tab" data-bs-target="#recommended" type="button" role="tab" aria-controls="recommended" aria-selected="true">Recommended</button>
                                     </li>
                                     <li className="nav-item" role="presentation">
-                                        <button className="nav-link" id="cheapest-tab" data-bs-toggle="tab" data-bs-target="#cheapest" type="button" role="tab" aria-controls="cheapest" aria-selected="false">Cheapest Price</button>
+                                        <button className="nav-link" id="cheapest-tab" data-bs-toggle="tab" data-bs-target="#cheapest" type="button" role="tab" aria-controls="cheapest" aria-selected="false" onClick={() => this.onCheapest(  )}>Cheapest Price</button>
                                     </li>
                                     <li className="nav-item" role="presentation">
                                         <button className="nav-link" id="fatest-tab" data-bs-toggle="tab" data-bs-target="#fatest" type="button" role="tab" aria-controls="fatest" aria-selected="false">Fatest</button>
@@ -151,7 +187,13 @@ class SearchList extends Component {
                                         </div>
                                     </div>
                                     <div className="tab-pane fade" id="cheapest" role="tabpanel" aria-labelledby="cheapest-tab">
-                                    
+                                    {searchData.offers && searchData.offers.length > 0 ? <ul className="list-unstyled" id="flightMoreDetails">
+                                                {
+                                                    searchData.offers.map((item, indexKey) => <ListData item={item} indexKey={indexKey} key={indexKey} offerRequestID={this.props.offerRequestID} {...this.props}/>)
+                                                }
+
+                                            </ul> : <><div className="data-error text-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height={18} width={18} className="me-1"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/></svg> This search returned no offers.</div></>}
                                     </div>
                                     <div className="tab-pane fade" id="fatest" role="tabpanel" aria-labelledby="fatest-tab">C</div>
                                 </div>
@@ -338,6 +380,8 @@ const mapDispatchToProps = dispatch => {
     return {
 
         offerRequestID: (id,history) => dispatch(offerRequestID(id,history)),
+        sortCheapestFlight: (obj) => dispatch(sortCheapestFlight(obj)),
+        filterFlightByName: (obj) => dispatch(filterFlightByName(obj)),
         
 
     }

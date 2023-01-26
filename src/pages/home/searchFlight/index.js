@@ -132,7 +132,7 @@ class SearchFlight extends Component {
 
     render() {
         const { isOpen, isLoading } = this.state;
-        const { flightData,OneWaySearchUpdate,RoundTripSearchUpdate,MultiCitySearchUpdate, SetFlightSearch } = this.props
+        const { flightData,OneWaySearchUpdate,RoundTripSearchUpdate,MultiCitySearchUpdate, SetFlightSearch, autoSearch } = this.props
         const { tripType, persons, seatType,roundTrips } = flightData
 
         console.log("cookies", roundTrips)
@@ -214,9 +214,9 @@ class SearchFlight extends Component {
                                 </div>
                             </div>
     
-                            {tripType === 0 ? <RoundTrip {...flightData} onClickToReverseRoundTrip={this.onClickToReverseRoundTrip}  onRoundWayDateChange={this.onRoundWayDateChange}  RoundTripSearchUpdate={RoundTripSearchUpdate} onSearchFlight={this.onSearchFlight}/> : null}
-                            {tripType === 1 ? <OneWay  {...flightData} onClickToReverseOneWayTrip={this.onClickToReverseOneWayTrip} onOnewayDateChange={this.onOnewayDateChange} OneWaySearchUpdate={OneWaySearchUpdate} onSearchFlight={this.onSearchFlight}/> : null}
-                            {tripType === 2 ? <MultiCity  {...flightData} onClickToRemoveMultiCity={this.onClickToRemoveMultiCity} onClickToReverseMultiCity={this.onClickToReverseMultiCity} onMultiWayDateChange={this.onMultiWayDateChange} MultiCitySearchUpdate={MultiCitySearchUpdate}/> : null}
+                            {tripType === 0 ? <RoundTrip {...flightData} autoSearch={autoSearch} onClickToReverseRoundTrip={this.onClickToReverseRoundTrip}  onRoundWayDateChange={this.onRoundWayDateChange}  RoundTripSearchUpdate={RoundTripSearchUpdate} onSearchFlight={this.onSearchFlight}/> : null}
+                            {tripType === 1 ? <OneWay  {...flightData} autoSearch={autoSearch} onClickToReverseOneWayTrip={this.onClickToReverseOneWayTrip} onOnewayDateChange={this.onOnewayDateChange} OneWaySearchUpdate={OneWaySearchUpdate} onSearchFlight={this.onSearchFlight}/> : null}
+                            {tripType === 2 ? <MultiCity  {...flightData} autoSearch={autoSearch} onClickToRemoveMultiCity={this.onClickToRemoveMultiCity} onClickToReverseMultiCity={this.onClickToReverseMultiCity} onMultiWayDateChange={this.onMultiWayDateChange} MultiCitySearchUpdate={MultiCitySearchUpdate}/> : null}
 
                             {tripType === 2 ?
                             <div className="form-row">

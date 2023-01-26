@@ -15,9 +15,9 @@ const DateRange = (props) => {
         onDateChange(picker.startDate)
     }
   
-    return <DateRangePicker  onApply={handleOnApply} startDate={startDate}  initialSettings={{
+    return <DateRangePicker  onApply={handleOnApply} startDate={start_date ? moment(start_date).format("DD/MM/YYYY") : startDate}  initialSettings={{
         locale: { format: 'DD/MM/YYYY', separator: '-' },
-        minDate:start_date ? null : startDate,
+        minDate:start_date ? moment(start_date).format("DD/MM/YYYY") : startDate,
         maxDate: maxDate,
         autoApply:true,
         showDropdowns: true,

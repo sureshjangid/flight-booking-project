@@ -18,7 +18,7 @@ class BookingList extends Component {
             <main>
                <div className="searchList-filter mb-sm-5 mb-3">
                 <div className="list-search-form">
-                <SearchFlight/>
+                <SearchFlight autoSearch={true}/>
                 </div>
                </div>
                {/* <Filters/> */}
@@ -69,7 +69,7 @@ class BookingList extends Component {
                         </div>
                     </div>
                 </section>
-                <SearchList {...this.props}/>
+                {searchData.searchData.offers ? <SearchList {...this.props}/> : null}
             </main>
             <AppFooter />
             <LoginPopUp />

@@ -290,3 +290,15 @@ export const SetFlightSearch = (obj) => {
         dispatch({type: SET_SEARCH_FROM_COOKIES, payload: obj})
     }
 }
+
+export const sortCheapestFlight = (obj) => {
+    return (dispatch) => {
+        dispatch({type: FLIGHT_SEARCH_DATA, payload: obj})
+    }
+}
+
+export const filterFlightByName = (obj) => {
+    return (dispatch) => {
+        dispatch({type: FLIGHT_SEARCH_DATA, payload: obj})
+    }
+}

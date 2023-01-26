@@ -4,8 +4,9 @@ import PlaceSearch from '../placeSearch'
 import moment from "moment";
 class OneWay extends Component{
     componentDidMount(){
+        const { autoSearch } = this.props
         if (window.performance) {
-            if (performance.navigation.type == 1) {
+            if (performance.navigation.type == 1 && autoSearch) {
                 setTimeout(() => {
                       this.props.onSearchFlight()
                 }, 1000);

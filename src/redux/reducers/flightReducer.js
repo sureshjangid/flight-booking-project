@@ -94,6 +94,7 @@ export default function reducer(state = initialState, action) {
                 addTrips[action.payload].from = clonedWidget.to
                 addTrips[action.payload].to = clonedWidget.from
             }
+            console.log("multi", addTrips)
             return { ...state, addTrips }
         }
         case REVERSE_ONE_WAY: {
